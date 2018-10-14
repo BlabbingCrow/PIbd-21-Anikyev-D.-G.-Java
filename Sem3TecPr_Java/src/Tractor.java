@@ -36,7 +36,6 @@ public class Tractor extends TractorBase{
     	this.backEquipment = backEquipment;
     }
     
-    
     /// <summary>         
     /// Конструктор         
     /// </summary>         
@@ -51,7 +50,6 @@ public class Tractor extends TractorBase{
         setFrontEquipment(frontEquipment);
         setBackEquipment(backEquipment);
     } 
-
 
     /// <summary>        
     /// Отрисовка автомобиля      

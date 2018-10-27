@@ -1,9 +1,8 @@
 import javax.swing.JPanel;
-import java.awt.Color;
 import java.awt.Graphics;
 
 public class PanelTractor extends JPanel {
-	public static Tractor tractor;
+	public static ITransport tractor;
 	public static boolean initialization = false;
 	
 	@Override 

@@ -1,16 +1,14 @@
 import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.Graphics;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
-import javax.swing.SwingConstants;
+
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
-import java.awt.FlowLayout;
+
 
 public class FormTractor {
 
@@ -59,9 +57,21 @@ public class FormTractor {
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		buttonCreate = new JButton("Создать");
-		buttonCreate.setBounds(10, 5, 92, 23);
+
+		buttonCreate = new JButton("Создать бульдозер");
+		buttonCreate.setBounds(10, 5, 133, 23);
 		panel.add(buttonCreate);
+		buttonCreate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Random rnd = new Random();
+				PanelTractor.tractor = new Tractor(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.blue, Color.yellow, true, true);
+				PanelTractor.initialization = true;
+				PanelTractor.tractor.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), panel.getWidth(), panel.getHeight());
+
+				panel.updateUI();
+			}
+		});
+
 		
 		buttonRight = new JButton("");
 		buttonRight.setBounds(824, 391, 50, 50);
@@ -101,6 +111,7 @@ public class FormTractor {
 			}
 		});
 		buttonLeft.setIcon(new ImageIcon("E:\\projects\\Java\\Eclipse\\Sem3TecPr1_Java\\Resources\\ArrowLeft1.png"));
+
 		
 		buttonUp = new JButton("");
 		buttonUp.setBounds(764, 330, 50, 50);
@@ -115,15 +126,20 @@ public class FormTractor {
 		});
 		buttonUp.setIcon(new ImageIcon("E:\\projects\\Java\\Eclipse\\Sem3TecPr1_Java\\Resources\\ArrowUp1.png"));
 		
-		buttonCreate.addActionListener(new ActionListener() {
+		JButton button = new JButton("Создать трактор");
+		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Random rnd = new Random();
-				PanelTractor.tractor = new Tractor(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.blue, Color.yellow);
+				PanelTractor.tractor = new TractorBase(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.blue);
+
 				PanelTractor.initialization = true;
 				PanelTractor.tractor.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), panel.getWidth(), panel.getHeight());
 
 				panel.updateUI();
 			}
 		});
+
+		button.setBounds(153, 5, 133, 23);
+		panel.add(button);	
 	}
 }

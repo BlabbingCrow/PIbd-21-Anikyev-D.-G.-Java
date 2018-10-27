@@ -11,4 +11,5 @@ public class PanelTractor extends JPanel {
 			FormTractor.tractor.DrawTractor(g);
 		}
 	}
+
 }

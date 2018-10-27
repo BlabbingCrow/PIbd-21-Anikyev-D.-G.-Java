@@ -9,8 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 
-
 public class FormTractor {
+	public static ITransport tractor;
 
 	private JFrame frame;
 	private JPanel panel;
@@ -64,10 +64,9 @@ public class FormTractor {
 		buttonCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Random rnd = new Random();
-				PanelTractor.tractor = new Tractor(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.blue, Color.yellow, true, true);
+				tractor = new Tractor(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.blue, Color.yellow, true, true);
 				PanelTractor.initialization = true;
-				PanelTractor.tractor.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), panel.getWidth(), panel.getHeight());
-
+				tractor.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), panel.getWidth(), panel.getHeight());
 				panel.updateUI();
 			}
 		});
@@ -79,7 +78,7 @@ public class FormTractor {
 		buttonRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(PanelTractor.initialization) {
-					PanelTractor.tractor.MoveTransport(Direction.Right);
+					tractor.MoveTransport(Direction.Right);
 				}
 				panel.updateUI();
 			}
@@ -92,7 +91,7 @@ public class FormTractor {
 		buttonDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(PanelTractor.initialization) {
-					PanelTractor.tractor.MoveTransport(Direction.Down);
+					tractor.MoveTransport(Direction.Down);
 				}
 				panel.updateUI();
 			}
@@ -105,13 +104,12 @@ public class FormTractor {
 		buttonLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(PanelTractor.initialization) {
-					PanelTractor.tractor.MoveTransport(Direction.Left);
+					tractor.MoveTransport(Direction.Left);
 				}
 				panel.updateUI();
 			}
 		});
 		buttonLeft.setIcon(new ImageIcon("E:\\projects\\Java\\Eclipse\\Sem3TecPr1_Java\\Resources\\ArrowLeft1.png"));
-
 		
 		buttonUp = new JButton("");
 		buttonUp.setBounds(764, 330, 50, 50);
@@ -119,7 +117,7 @@ public class FormTractor {
 		buttonUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(PanelTractor.initialization) {
-					PanelTractor.tractor.MoveTransport(Direction.Up);
+					tractor.MoveTransport(Direction.Up);
 				}
 				panel.updateUI();
 			}
@@ -130,11 +128,9 @@ public class FormTractor {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Random rnd = new Random();
-				PanelTractor.tractor = new TractorBase(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.blue);
-
+				tractor = new TractorBase(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.blue);
 				PanelTractor.initialization = true;
-				PanelTractor.tractor.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), panel.getWidth(), panel.getHeight());
-
+				tractor.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), panel.getWidth(), panel.getHeight());
 				panel.updateUI();
 			}
 		});

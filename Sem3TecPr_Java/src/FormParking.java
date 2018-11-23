@@ -134,7 +134,7 @@ public class FormParking {
 		
 		model = new DefaultListModel();
 		for(int i = 0; i < countLevel; i++) {
-			model.addElement("Док " + (i+1));
+			model.addElement("Уровень " + (i+1));
 		}
 		listBoxParkings.setModel(model); 
 		listBoxParkings.setSelectedIndex(0); 

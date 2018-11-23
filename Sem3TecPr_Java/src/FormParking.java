@@ -112,11 +112,6 @@ public class FormParking {
 				if (textField.getText() != "")
 	            {
 	                ITransport tractor = parking.getParking(listBoxParkings.getSelectedIndex()).Remove(Integer.parseInt(textField.getText()));
-	                /*panel.updateUI();
-	                PanelTakeParking.tractor = tractor;
-	                panelTake.updateUI();*/
-	                
-	                //ITransport ship = dock.getDock(listBoxDocks.getSelectedIndex()).removeShip(Integer.parseInt(textFieldPlace.getText()));
                     if (tractor != null) {
                     	tractor.SetPosition(5, 5, panelTake.getWidth(), panelTake.getHeight());
                         PanelTakeParking.tractor = tractor;

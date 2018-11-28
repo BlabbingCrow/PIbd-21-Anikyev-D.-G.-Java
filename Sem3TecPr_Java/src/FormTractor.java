@@ -57,7 +57,6 @@ public class FormTractor {
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-
 		buttonCreate = new JButton("Создать бульдозер");
 		buttonCreate.setBounds(10, 5, 133, 23);
 		panel.add(buttonCreate);
@@ -134,7 +133,6 @@ public class FormTractor {
 				panel.updateUI();
 			}
 		});
-
 		button.setBounds(153, 5, 133, 23);
 		panel.add(button);	
 	}

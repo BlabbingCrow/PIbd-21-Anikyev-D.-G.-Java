@@ -1,6 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /// <summary>
     /// Параметризованны класс для хранения набора объектов от интерфейса ITransport
@@ -10,7 +10,12 @@ public class Parking<T extends ITransport> {
 	/// <summary>
     /// Массив объектов, которые храним
     /// </summary>
-    private ArrayList<T> _places;
+    private HashMap<Integer, T> _places;
+    
+    /// <summary>
+    /// Максимальное количество мест на парковке
+    /// </summary>
+    private int _maxCount;
     
     /// <summary>
     /// Ширина окна отрисовки
@@ -52,13 +57,10 @@ public class Parking<T extends ITransport> {
     /// <param name="pictureHeight">Рамзер парковки - высота</param>
     public Parking(int sizes, int pictureWidth, int pictureHeight)
     {
-        _places = new ArrayList<T>();
+    	_maxCount = sizes;
+    	_places = new HashMap<Integer,T>();
         setPictureWidth( pictureWidth);
         setPictureHeight( pictureHeight);
-        for (int i = 0; i < sizes; i++)
-        {
-            _places.add(null);
-        }
     }
     
     /// <summary>
@@ -70,11 +72,16 @@ public class Parking<T extends ITransport> {
     /// <returns></returns>
     public int Add(T car)
     {
-        for (int i = 0; i < _places.size(); i++)
+    	if(_places.size() == _maxCount)
+        {
+            return -1;
+        }
+    	
+        for (int i = 0; i < _maxCount; i++)
         {
             if (CheckFreePlace(i))
             {
-                _places.add(i, car);
+                _places.put(i, car);
                 _places.get(i).SetPosition(5 + i / 5 * _placeSizeWidth + 5, i % 5 * _placeSizeHeight + 15, getPictureWidth(), getPictureHeight());
                 return i;
             }
@@ -91,14 +98,14 @@ public class Parking<T extends ITransport> {
     /// <returns></returns>
     public T Remove(int index)
     {
-        if (index < 0 || index > _places.size())
+        if (index < 0 || index > _maxCount)
         {
             return null;
         }
         if (!CheckFreePlace(index))
         {
             T car = _places.get(index);
-            _places.set(index, null);
+            _places.remove(index);
             return car;
         }
         return null;
@@ -111,7 +118,7 @@ public class Parking<T extends ITransport> {
     /// <returns></returns>
     private boolean CheckFreePlace(int index)
     {
-        return _places.get(index) == null;
+    	return !_places.containsKey(index);
     }
     
     /// <summary>
@@ -121,13 +128,10 @@ public class Parking<T extends ITransport> {
     public void Draw(Graphics g)
     {
         DrawMarking(g);
-        for (int i = 0; i < _places.size(); i++)
+        Object[] keys = _places.keySet().toArray();
+        for (int i = 0; i < keys.length; i++)
         {
-            if (!CheckFreePlace(i))
-            {
-                //если место не пустое
-                _places.get(i).DrawTractor(g);
-            }
+            _places.get(keys[i]).DrawTractor(g);
         }
     }
     /// <summary>
@@ -138,8 +142,8 @@ public class Parking<T extends ITransport> {
     {
     	g.setColor(Color.BLACK);
         //границы праковки
-        g.drawRect( 0, 0, (_places.size() / 5) * _placeSizeWidth, 480);
-        for (int i = 0; i < _places.size() / 5; i++)
+        g.drawRect( 0, 0, (_maxCount / 5) * _placeSizeWidth, 480);
+        for (int i = 0; i < _maxCount / 5; i++)
         {
             //отрисовываем, по 5 мест на линии
             for (int j = 0; j < 6; ++j)

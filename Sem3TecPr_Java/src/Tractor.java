@@ -35,7 +35,7 @@ public class Tractor extends TractorBase{
     private void setBackEquipment(boolean backEquipment) {
     	this.backEquipment = backEquipment;
     }
-    
+
     /// <summary>         
     /// Конструктор         
     /// </summary>         

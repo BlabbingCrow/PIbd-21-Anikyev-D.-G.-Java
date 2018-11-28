@@ -3,21 +3,28 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 public class FormParking {
-	public static Parking<ITransport> parking;
-	
 	private JFrame frame;
 	private JTextField textField;
 	private JPanel panel;
 	private JPanel panelTake;
+	public static JList listBoxParkings;
+	private DefaultListModel model;
+	
+	public static MultiLevelParking parking;
+	private static final int countLevel = 5;
 
 	/**
 	 * Launch the application.
@@ -40,7 +47,7 @@ public class FormParking {
 	 */
 	public FormParking() {
 		initialize();
-		parking = new Parking<ITransport>(20, panel.getWidth(), panel.getHeight());
+		parking = new MultiLevelParking(countLevel, panel.getWidth(), panel.getHeight());
 		panel.updateUI();
 	}
 
@@ -49,7 +56,7 @@ public class FormParking {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1000, 504);
+		frame.setBounds(100, 100, 1050, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -62,11 +69,13 @@ public class FormParking {
 			public void actionPerformed(ActionEvent arg0) {
 				Color mainColor = JColorChooser.showDialog(null, "Choose a color", Color.GRAY);
 				ITransport tractor = new TractorBase(100, 1000, mainColor);
-                parking.Add(tractor);
-                panel.updateUI();
+				int place = parking.getParking(listBoxParkings.getSelectedIndex()).Add(tractor);			
+				if(place != -1){
+					panel.updateUI();
+				}
 			}
 		});
-		buttonSetTractorBase.setBounds(804, 11, 170, 85);
+		buttonSetTractorBase.setBounds(825, 150, 185, 50);
 		frame.getContentPane().add(buttonSetTractorBase);
 		
 		JButton buttonSetTractor = new JButton("Припарковать бульдозер");
@@ -75,11 +84,13 @@ public class FormParking {
 				Color mainColor = JColorChooser.showDialog(null, "Choose a color", Color.GRAY);
 				Color dopColor = JColorChooser.showDialog(null, "Choose a color", Color.GRAY);
 				ITransport tractor = new Tractor(100, 1000, mainColor, dopColor, true, true);
-                parking.Add(tractor);
-                panel.updateUI();
+				int place = parking.getParking(listBoxParkings.getSelectedIndex()).Add(tractor);			
+				if(place != -1){
+					panel.updateUI();
+				}
 			}
 		});
-		buttonSetTractor.setBounds(804, 107, 170, 85);
+		buttonSetTractor.setBounds(825, 207, 185, 50);
 		frame.getContentPane().add(buttonSetTractor);
 		
 		JLabel label = new JLabel("Место:");
@@ -100,14 +111,41 @@ public class FormParking {
 			public void actionPerformed(ActionEvent e) {
 				if (textField.getText() != "")
 	            {
-	                ITransport tractor = parking.Remove(Integer.parseInt(textField.getText()));
-	                panel.updateUI();
-	                PanelTakeParking.tractor = tractor;
-	                panelTake.updateUI();
-	            }
+	                ITransport tractor = parking.getParking(listBoxParkings.getSelectedIndex()).Remove(Integer.parseInt(textField.getText()));
+                    if (tractor != null) {
+                    	tractor.SetPosition(5, 5, panelTake.getWidth(), panelTake.getHeight());
+                        PanelTakeParking.tractor = tractor;
+                        panelTake.updateUI();
+                        panel.updateUI();
+                    } else {
+                    	PanelTakeParking.tractor = null;
+                        panelTake.updateUI();
+                    }
+                }
 			}
 		});
 		buttonTake.setBounds(845, 314, 89, 23);
 		frame.getContentPane().add(buttonTake);
+		
+		
+		listBoxParkings = new JList(); 
+		listBoxParkings.setBounds(825, 20, 118, 118); 
+		frame.getContentPane().add(listBoxParkings);
+		
+		model = new DefaultListModel();
+		for(int i = 0; i < countLevel; i++) {
+			model.addElement("Уровень " + (i+1));
+		}
+		listBoxParkings.setModel(model); 
+		listBoxParkings.setSelectedIndex(0); 
+
+		
+		listBoxParkings.addListSelectionListener(new ListSelectionListener() { 
+			@Override 
+			public void valueChanged(ListSelectionEvent e) { 
+				panel.updateUI(); 
+			} 
+		});
+
 	}
 }

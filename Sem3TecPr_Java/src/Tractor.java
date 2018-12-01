@@ -13,6 +13,35 @@ public class Tractor extends TractorBase{
     private void setDopColor(Color dopColor) {
     	this.dopColor = dopColor;
     }
+    public void setDopColor(String colorName) {
+        switch (colorName) {
+            case "yellow":
+            	dopColor = Color.YELLOW;
+                break;
+            case "blue":
+            	dopColor = Color.BLUE;
+                break;
+            case "red":
+            	dopColor = Color.RED;
+                break;
+            case "green":
+            	dopColor = Color.GREEN;
+                break;
+            case "black":
+            	dopColor = Color.BLACK;
+                break;
+            case "orange":
+            	dopColor = Color.ORANGE;
+                break;
+            case "grey":
+            	dopColor = Color.GRAY;
+                break;
+            case "white":
+            	dopColor = Color.WHITE;
+                break;
+        }
+
+    }
     
     /// <summary>         
     /// Признак наличия переднего спойлера         
@@ -35,7 +64,7 @@ public class Tractor extends TractorBase{
     private void setBackEquipment(boolean backEquipment) {
     	this.backEquipment = backEquipment;
     }
-
+  
     /// <summary>         
     /// Конструктор         
     /// </summary>         

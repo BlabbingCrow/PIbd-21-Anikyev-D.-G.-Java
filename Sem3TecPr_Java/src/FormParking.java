@@ -64,33 +64,20 @@ public class FormParking {
 		panel.setBounds(10, 11, 784, 443);
 		frame.getContentPane().add(panel);
 		
-		JButton buttonSetTractorBase = new JButton("Припарковать трактор");
-		buttonSetTractorBase.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Color mainColor = JColorChooser.showDialog(null, "Choose a color", Color.GRAY);
-				ITransport tractor = new TractorBase(100, 1000, mainColor);
-				int place = parking.getParking(listBoxParkings.getSelectedIndex()).Add(tractor);			
-				if(place != -1){
-					panel.updateUI();
-				}
-			}
-		});
-		buttonSetTractorBase.setBounds(825, 150, 185, 50);
-		frame.getContentPane().add(buttonSetTractorBase);
-		
-		JButton buttonSetTractor = new JButton("Припарковать бульдозер");
+		JButton buttonSetTractor = new JButton("Заказать технику");
 		buttonSetTractor.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Color mainColor = JColorChooser.showDialog(null, "Choose a color", Color.GRAY);
-				Color dopColor = JColorChooser.showDialog(null, "Choose a color", Color.GRAY);
-				ITransport tractor = new Tractor(100, 1000, mainColor, dopColor, true, true);
-				int place = parking.getParking(listBoxParkings.getSelectedIndex()).Add(tractor);			
-				if(place != -1){
-					panel.updateUI();
-				}
+			public void actionPerformed(ActionEvent arg0) {
+				if (listBoxParkings.getSelectedIndex() > -1) {
+                    DialogConfig dConfig = new DialogConfig(frame);
+                    if (dConfig.isSuccessful()) {
+                    	ITransport tractor = dConfig.getTractor();
+                        int i = parking.getParking(listBoxParkings.getSelectedIndex()).Add(tractor);
+                        panel.repaint();
+                    }
+                }
 			}
 		});
-		buttonSetTractor.setBounds(825, 207, 185, 50);
+		buttonSetTractor.setBounds(804, 194, 185, 50);
 		frame.getContentPane().add(buttonSetTractor);
 		
 		JLabel label = new JLabel("Место:");
@@ -146,6 +133,5 @@ public class FormParking {
 				panel.updateUI(); 
 			} 
 		});
-
 	}
 }

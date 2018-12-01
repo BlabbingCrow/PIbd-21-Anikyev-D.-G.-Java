@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 
 public interface ITransport {
@@ -21,4 +22,10 @@ public interface ITransport {
     /// </summary>         
     /// <param name="g"></param>         
     void DrawTractor(Graphics g);
+    
+    /// <summary>
+    /// Смена основного цвета автомобиля
+    /// </summary>
+    /// <param name="color"></param>
+    void setMainColor(String colorName);
 }

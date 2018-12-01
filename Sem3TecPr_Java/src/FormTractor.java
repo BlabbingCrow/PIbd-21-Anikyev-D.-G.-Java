@@ -4,14 +4,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 
 public class FormTractor {
 	public static ITransport tractor;
-
 	private JFrame frame;
 	private JPanel panel;
 	private JButton buttonUp;
@@ -66,10 +64,10 @@ public class FormTractor {
 				tractor = new Tractor(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.blue, Color.yellow, true, true);
 				PanelTractor.initialization = true;
 				tractor.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), panel.getWidth(), panel.getHeight());
+
 				panel.updateUI();
 			}
 		});
-
 		
 		buttonRight = new JButton("");
 		buttonRight.setBounds(824, 391, 50, 50);

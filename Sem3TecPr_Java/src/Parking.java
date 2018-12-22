@@ -55,6 +55,7 @@ public class Parking<T extends ITransport> {
     /// <param name="sizes">Количество мест на парковке</param>
     /// <param name="pictureWidth">Рамзер парковки - ширина</param>
     /// <param name="pictureHeight">Рамзер парковки - высота</param>
+
     public Parking(int sizes, int pictureWidth, int pictureHeight) {
     	_maxCount = sizes;
     	_places = new HashMap<Integer,T>();
@@ -69,6 +70,7 @@ public class Parking<T extends ITransport> {
     /// <param name="p">Парковка</param>
     /// <param name="car">Добавляемый автомобиль</param>
     /// <returns></returns>
+
     public int Add(T car) throws ParkingOverflowException {
     	if(_places.size() == _maxCount)
         {

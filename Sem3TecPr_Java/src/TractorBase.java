@@ -20,6 +20,15 @@ public class TractorBase extends Vehicle {
         setMainColor(mainColor);
     }
 
+    public TractorBase(String info) {
+        String[] parameters = info.split(";");
+        if (parameters.length == 3) {
+        	setMaxSpeed(Integer.parseInt(parameters[0]));
+            setWeight(Integer.parseInt(parameters[1]));
+            setMainColor(parameters[2]);
+        }
+    }
+    
 	@Override
 	public void MoveTransport(Direction direction) {
 		float step = maxSpeed * 100 / weight; switch (direction)
@@ -95,4 +104,8 @@ public class TractorBase extends Vehicle {
         g.fillOval( (int)_startPosX + 25, (int)_startPosY + 25, 20, 20);
         g.fillOval( (int)_startPosX + 95, (int)_startPosY + 35, 10, 10);
 	}
+	
+	public String toString() {
+        return maxSpeed + ";" + weight + ";" + colorToString(mainColor);
+    }
 }

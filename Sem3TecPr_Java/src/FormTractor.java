@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 public class FormTractor {
 	public static ITransport tractor;
+
 	private JFrame frame;
 	private JPanel panel;
 	private JButton buttonUp;
@@ -81,7 +82,7 @@ public class FormTractor {
 			}
 		});
 		buttonRight.setIcon(new ImageIcon("E:\\projects\\Java\\Eclipse\\Sem3TecPr1_Java\\Resources\\ArrowRight1.png"));
-		
+
 		buttonDown = new JButton("");
 		buttonDown.setBounds(764, 391, 50, 50);
 		panel.add(buttonDown);
@@ -94,6 +95,7 @@ public class FormTractor {
 			}
 		});
 		buttonDown.setIcon(new ImageIcon("E:\\projects\\Java\\Eclipse\\Sem3TecPr1_Java\\Resources\\ArrowDown1.png"));
+
 		
 		buttonLeft = new JButton("");
 		buttonLeft.setBounds(704, 391, 50, 50);

@@ -28,4 +28,7 @@ public interface ITransport {
     /// </summary>
     /// <param name="color"></param>
     void setMainColor(String colorName);
+
+    String colorToString(Color color);
+
 }

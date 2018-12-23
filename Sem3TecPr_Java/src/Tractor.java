@@ -64,7 +64,7 @@ public class Tractor extends TractorBase{
     private void setBackEquipment(boolean backEquipment) {
     	this.backEquipment = backEquipment;
     }
-  
+
     /// <summary>         
     /// Конструктор         
     /// </summary>         
@@ -79,6 +79,20 @@ public class Tractor extends TractorBase{
         setFrontEquipment(frontEquipment);
         setBackEquipment(backEquipment);
     } 
+
+    public Tractor(String info) {
+        super(info);
+        String[] parameters = info.split(";");
+        if (parameters.length == 6) {
+        	setMaxSpeed(Integer.parseInt(parameters[0]));
+            setWeight(Integer.parseInt(parameters[1]));
+            setMainColor(parameters[2]);
+            setDopColor(parameters[3]);
+            setFrontEquipment(Boolean.parseBoolean(parameters[4]));
+            setBackEquipment(Boolean.parseBoolean(parameters[5]));
+        }
+    }
+
 
     /// <summary>        
     /// Отрисовка автомобиля      
@@ -118,5 +132,9 @@ public class Tractor extends TractorBase{
         g.setColor(dopColor); 
         // рисуем гоночные полоски       
         g.fillRect( (int)_startPosX + 55, (int)_startPosY + 25, 45, 5);
+    }
+    
+    public String toString() {
+        return (super.toString() + ";" + colorToString(dopColor) + ";" + getFrontEquipment() + ";" + getBackEquipment());
     }
 }

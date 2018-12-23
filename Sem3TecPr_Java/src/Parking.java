@@ -55,8 +55,8 @@ public class Parking<T extends ITransport> {
     /// <param name="sizes">Количество мест на парковке</param>
     /// <param name="pictureWidth">Рамзер парковки - ширина</param>
     /// <param name="pictureHeight">Рамзер парковки - высота</param>
-    public Parking(int sizes, int pictureWidth, int pictureHeight)
-    {
+
+    public Parking(int sizes, int pictureWidth, int pictureHeight) {
     	_maxCount = sizes;
     	_places = new HashMap<Integer,T>();
         setPictureWidth( pictureWidth);
@@ -70,11 +70,11 @@ public class Parking<T extends ITransport> {
     /// <param name="p">Парковка</param>
     /// <param name="car">Добавляемый автомобиль</param>
     /// <returns></returns>
-    public int Add(T car)
-    {
+
+    public int Add(T car) throws ParkingOverflowException {
     	if(_places.size() == _maxCount)
         {
-            return -1;
+    		throw new ParkingOverflowException();
         }
     	
         for (int i = 0; i < _maxCount; i++)
@@ -96,8 +96,7 @@ public class Parking<T extends ITransport> {
     /// <param name="p">Парковка</param>
     /// <param name="index">Индекс места, с которого пытаемся извлечь объект</param>
     /// <returns></returns>
-    public T Remove(int index)
-    {
+    public T Remove(int index) throws ParkingNotFoundException {
         if (index < 0 || index > _maxCount)
         {
             return null;
@@ -108,7 +107,7 @@ public class Parking<T extends ITransport> {
             _places.remove(index);
             return car;
         }
-        return null;
+        throw new ParkingNotFoundException(index);
     }
     
     /// <summary>
@@ -116,8 +115,7 @@ public class Parking<T extends ITransport> {
     /// </summary>
     /// <param name="index">Номер парковочного места (порядковый номер вмассиве)</param>
     /// <returns></returns>
-    private boolean CheckFreePlace(int index)
-    {
+    private boolean CheckFreePlace(int index) {
     	return !_places.containsKey(index);
     }
     
@@ -125,8 +123,7 @@ public class Parking<T extends ITransport> {
     /// Метод отрисовки парковки
     /// </summary>
     /// <param name="g"></param>
-    public void Draw(Graphics g)
-    {
+    public void Draw(Graphics g) {
         DrawMarking(g);
         Object[] keys = _places.keySet().toArray();
         for (int i = 0; i < keys.length; i++)
@@ -138,20 +135,35 @@ public class Parking<T extends ITransport> {
     /// Метод отрисовки разметки парковочных мест
     /// </summary>
     /// <param name="g"></param>
-    private void DrawMarking(Graphics g)
-    {
+    private void DrawMarking(Graphics g) {
     	g.setColor(Color.BLACK);
         //границы праковки
         g.drawRect( 0, 0, (_maxCount / 5) * _placeSizeWidth, 480);
-        for (int i = 0; i < _maxCount / 5; i++)
-        {
+        for (int i = 0; i < _maxCount / 5; i++) {
             //отрисовываем, по 5 мест на линии
-            for (int j = 0; j < 6; ++j)
-            {
+            for (int j = 0; j < 6; ++j) {
                 //линия рамзетки места
                 g.drawLine( i * _placeSizeWidth, j * _placeSizeHeight, i * _placeSizeWidth + 110, j * _placeSizeHeight);
             }
             g.drawLine( i * _placeSizeWidth, 0, i * _placeSizeWidth, 400);
         }
+    }
+    
+    public T getTrasport(int ind) throws ParkingNotFoundException {
+        if (_places.containsKey(ind)) {
+            return _places.get(ind);
+        }
+        throw new ParkingNotFoundException(ind);
+    }
+
+    public void setTrasport(int ind, T t) throws ParkingOccupiedPlaceException {
+        if (CheckFreePlace(ind)) {
+            _places.put(ind, t);
+            _places.get(ind).SetPosition(10 + ind / 5 * _placeSizeWidth + 5,
+                    ind % 5 * _placeSizeHeight + 15, pictureWidth, pictureHeight);
+        }
+        else {
+    		throw new ParkingOccupiedPlaceException(ind);
+    	}
     }
 }

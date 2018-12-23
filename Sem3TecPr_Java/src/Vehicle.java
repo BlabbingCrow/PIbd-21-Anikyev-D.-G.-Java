@@ -84,6 +84,27 @@ public abstract class Vehicle implements ITransport {
         }
     }
     
+    @Override
+    public String colorToString(Color color) {
+        if (color.equals(Color.WHITE)) {
+            return "white";
+        } else if (color.equals(Color.BLACK)) {
+            return "black";
+        } else if (color.equals(Color.RED)) {
+            return "red";
+        } else if (color.equals(Color.YELLOW)) {
+            return "yellow";
+        } else if (color.equals(Color.ORANGE)) {
+            return "orange";
+        } else if (color.equals(Color.BLUE)) {
+            return "blue";
+        } else if (color.equals(Color.GRAY)) {
+            return "gray";
+        } else if (color.equals(Color.GREEN)) {
+            return "green";
+        }
+        return "white";
+    }
     
     public void SetPosition(int x, int y, int width, int height)
     {

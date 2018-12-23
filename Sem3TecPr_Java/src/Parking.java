@@ -129,7 +129,7 @@ public class Parking<T extends ITransport> {
             _places.get(keys[i]).DrawTractor(g);
         }
     }
-    
+  
     /// <summary>
     /// Метод отрисовки разметки парковочных мест
     /// </summary>

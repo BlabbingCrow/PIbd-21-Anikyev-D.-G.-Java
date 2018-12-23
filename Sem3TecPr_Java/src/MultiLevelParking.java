@@ -35,6 +35,7 @@ public class MultiLevelParking {
         parkingStages = new ArrayList<Parking<ITransport>>();
         this.pictureWidth = pictureWidth;
         this.pictureHeight = pictureHeight;
+
         for (int i = 0; i < countStages; ++i)
         {
             parkingStages.add(new Parking<ITransport>(countPlaces, pictureWidth, pictureHeight));

@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 
 public class FormTractor {
 	public static ITransport tractor;
-	
+
 	private JFrame frame;
 	private JPanel panel;
 	private JButton buttonUp;
@@ -81,8 +81,7 @@ public class FormTractor {
 				panel.updateUI();
 			}
 		});
-		buttonRight.setIcon(new ImageIcon("E:\\projects\\Java\\Eclipse\\Sem3TecPr2_Java\\Resources\\ArrowRight1.png"));
-		
+		buttonRight.setIcon(new ImageIcon("E:\\projects\\Java\\Eclipse\\Sem3TecPr1_Java\\Resources\\ArrowRight1.png"));
 		buttonDown = new JButton("");
 		buttonDown.setBounds(764, 391, 50, 50);
 		panel.add(buttonDown);
@@ -94,7 +93,7 @@ public class FormTractor {
 				panel.updateUI();
 			}
 		});
-		buttonDown.setIcon(new ImageIcon("E:\\projects\\Java\\Eclipse\\Sem3TecPr2_Java\\Resources\\ArrowDown1.png"));
+		buttonDown.setIcon(new ImageIcon("E:\\projects\\Java\\Eclipse\\Sem3TecPr1_Java\\Resources\\ArrowDown1.png"));
 		
 		buttonLeft = new JButton("");
 		buttonLeft.setBounds(704, 391, 50, 50);
@@ -107,7 +106,7 @@ public class FormTractor {
 				panel.updateUI();
 			}
 		});
-		buttonLeft.setIcon(new ImageIcon("E:\\projects\\Java\\Eclipse\\Sem3TecPr2_Java\\Resources\\ArrowLeft1.png"));
+		buttonLeft.setIcon(new ImageIcon("E:\\projects\\Java\\Eclipse\\Sem3TecPr1_Java\\Resources\\ArrowLeft1.png"));
 		
 		buttonUp = new JButton("");
 		buttonUp.setBounds(764, 330, 50, 50);
@@ -120,7 +119,7 @@ public class FormTractor {
 				panel.updateUI();
 			}
 		});
-		buttonUp.setIcon(new ImageIcon("E:\\projects\\Java\\Eclipse\\Sem3TecPr2_Java\\Resources\\ArrowUp1.png"));
+		buttonUp.setIcon(new ImageIcon("E:\\projects\\Java\\Eclipse\\Sem3TecPr1_Java\\Resources\\ArrowUp1.png"));
 		
 		JButton button = new JButton("Создать трактор");
 		button.addActionListener(new ActionListener() {

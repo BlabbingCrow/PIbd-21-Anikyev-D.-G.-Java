@@ -23,6 +23,7 @@ public class MultiLevelParking {
     /// Высота окна отрисовки
     /// </summary>
     private int pictureHeight;
+
 	
 	/// <summary>
     /// Конструктор

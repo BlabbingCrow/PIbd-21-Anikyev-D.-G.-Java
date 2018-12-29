@@ -82,7 +82,6 @@ public class FormTractor {
 			}
 		});
 		buttonRight.setIcon(new ImageIcon("E:\\projects\\Java\\Eclipse\\Sem3TecPr1_Java\\Resources\\ArrowRight1.png"));
-
 		buttonDown = new JButton("");
 		buttonDown.setBounds(764, 391, 50, 50);
 		panel.add(buttonDown);
@@ -95,7 +94,6 @@ public class FormTractor {
 			}
 		});
 		buttonDown.setIcon(new ImageIcon("E:\\projects\\Java\\Eclipse\\Sem3TecPr1_Java\\Resources\\ArrowDown1.png"));
-
 		
 		buttonLeft = new JButton("");
 		buttonLeft.setBounds(704, 391, 50, 50);
@@ -130,6 +128,7 @@ public class FormTractor {
 				tractor = new TractorBase(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.blue);
 				PanelTractor.initialization = true;
 				tractor.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), panel.getWidth(), panel.getHeight());
+
 				panel.updateUI();
 			}
 		});

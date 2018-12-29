@@ -36,7 +36,6 @@ public class MultiLevelParking {
         parkingStages = new ArrayList<Parking<ITransport>>();
         this.pictureWidth = pictureWidth;
         this.pictureHeight = pictureHeight;
-
         for (int i = 0; i < countStages; ++i)
         {
             parkingStages.add(new Parking<ITransport>(countPlaces, pictureWidth, pictureHeight));
@@ -52,7 +51,7 @@ public class MultiLevelParking {
         return null;
     }
     
-    public void saveData(String filename) {
+    public boolean saveData(String filename) {
         File file = new File(filename);
         if (file.exists()) {
             file.delete();
@@ -62,8 +61,8 @@ public class MultiLevelParking {
             for (Parking<ITransport> level : parkingStages) {
                 writeToFile("Level" + System.lineSeparator(), bw);
                 for (int i = 0; i < countPlaces; i++) {
-                	try {
-	                    ITransport tractor = level.getTrasport(i);
+                    ITransport tractor = level.getTrasport(i);
+                    if (tractor != null) {
                         if (tractor.getClass().getSimpleName().equals("TractorBase")) {
                             writeToFile(i + ":TractorBase:", bw);
                         }
@@ -71,19 +70,20 @@ public class MultiLevelParking {
                             writeToFile(i + ":Tractor:", bw);
                         }
                         writeToFile(tractor + System.lineSeparator(), bw);
-                	} catch (Exception ex) { }
-                    finally { }
+                    }
                 }
             }
+            return true;
         } catch (Exception ex) {
             System.out.println(ex);
+            return false;
         }
     }
 
-    public void loadData(String filename) throws Exception {
+    public boolean loadData(String filename) {
         File file = new File(filename);
         if (!file.exists()) {
-            throw new FileNotFoundException();
+            return false;
         }
         String bufferTextFromFile = "";
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -95,7 +95,7 @@ public class MultiLevelParking {
             if (strs[0].contains("CountLeveles")) {
                 int count = Integer.parseInt(strs[0].split(":")[1]);
             } else {
-                throw new Exception("Неверный формат файла");
+                return false;
             }
             int counter = -1;
             ITransport tractor = null;
@@ -115,9 +115,11 @@ public class MultiLevelParking {
                 }
                 parkingStages.get(counter).setTrasport(Integer.parseInt(strs[i].split(":")[0]), tractor);
             }
+            return true;
         } catch (Exception e) {
-            throw e;
+            System.out.println(e);
         }
+        return false;
     }
 
     private void writeToFile(String text, BufferedWriter writer) {

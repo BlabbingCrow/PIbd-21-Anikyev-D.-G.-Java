@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
 
-public class Tractor extends TractorBase{
+public class Tractor extends TractorBase {
     /// <summary>         
     /// Дополнительный цвет         
     /// </summary>         
@@ -72,8 +72,7 @@ public class Tractor extends TractorBase{
     /// <param name="weight">Вес автомобиля</param>         
     /// <param name="mainColor">Основной цвет кузова</param>       
     /// <param name="dopColor">Дополнительный цвет</param>         
-    public Tractor(int maxSpeed, float weight, Color mainColor, Color dopColor, boolean frontEquipment, boolean backEquipment)   
-    {
+    public Tractor(int maxSpeed, float weight, Color mainColor, Color dopColor, boolean frontEquipment, boolean backEquipment) {
     	super(maxSpeed, weight, mainColor);
         setDopColor(dopColor);
         setFrontEquipment(frontEquipment);
@@ -93,16 +92,13 @@ public class Tractor extends TractorBase{
         }
     }
 
-
     /// <summary>        
     /// Отрисовка автомобиля      
     /// </summary>      
     /// <param name="g"></param>     
-    public void DrawTractor(Graphics g)
-    {  	
+    public void DrawTractor(Graphics g) {  	
         // отрисуем сперва переднее оборудование автомобиля           
-        if (frontEquipment)
-        {
+        if (frontEquipment) {
             Polygon points = new Polygon();
             points.addPoint((int)_startPosX + 103, (int)_startPosY + 35);
             points.addPoint((int)_startPosX + 113, (int)_startPosY + 10);
@@ -113,8 +109,7 @@ public class Tractor extends TractorBase{
             g.drawPolygon(points);
         }
         // рисуем заднее оборудование автомобиля       
-        if (backEquipment)
-        {
+        if (backEquipment) {
         	Polygon points = new Polygon();
             points.addPoint((int)_startPosX + 25, (int)_startPosY + 35);
             points.addPoint((int)_startPosX + 10, (int)_startPosY + 30);

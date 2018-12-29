@@ -13,8 +13,7 @@ public class TractorBase extends Vehicle {
     protected int carHeight = 55;
 	
 	
-    public TractorBase(int maxSpeed, float weight, Color mainColor)
-    {
+    public TractorBase(int maxSpeed, float weight, Color mainColor) {
         setMaxSpeed(maxSpeed);
         setWeight(weight);
         setMainColor(mainColor);
@@ -31,33 +30,29 @@ public class TractorBase extends Vehicle {
     
 	@Override
 	public void MoveTransport(Direction direction) {
-		float step = maxSpeed * 100 / weight; switch (direction)
-        {
+		float step = maxSpeed * 100 / weight; 
+		switch (direction) {
             // вправо                 
             case Right:
-                if (_startPosX + step < _pictureWidth - carWidth)
-                {
+                if (_startPosX + step < _pictureWidth - carWidth) {
                     _startPosX += step;
                 }
                 break;
             //влево               
             case Left:
-                if (_startPosX - step > 0)
-                {
+                if (_startPosX - step > 0) {
                     _startPosX -= step;
                 }
                 break;
             //вверх          
             case Up:
-                if (_startPosY - step > 0)
-                {
+                if (_startPosY - step > 0) {
                     _startPosY -= step;
                 }
                 break;
             //вниз      
             case Down:
-                if (_startPosY + step < _pictureHeight - carHeight)
-                {
+                if (_startPosY + step < _pictureHeight - carHeight) {
                     _startPosY += step;
                 }
                 break;
